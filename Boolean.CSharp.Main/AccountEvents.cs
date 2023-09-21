@@ -18,5 +18,10 @@ namespace Boolean.CSharp.Main
         {
             _accounts.Add(accounts);
         }
+
+        public void AddToSavingsAccount(IAccount accounts)
+        {
+            _accounts.Add(accounts);
+        }
     }
 }

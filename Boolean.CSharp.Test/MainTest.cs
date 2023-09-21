@@ -9,7 +9,7 @@ namespace Boolean.CSharp.Test
     {
        
         [Test]
-        public void StroreInCurrentAccount()
+        public void StoreInCurrentAccount()
         {
             // arrange
             AccountEvents accountEvents = new AccountEvents();
@@ -20,6 +20,16 @@ namespace Boolean.CSharp.Test
             // arrange
             Assert.AreEqual(true, accountEvents.Transactions.Any(x => x.Balance == 1000m));
 
+        }
+
+        [Test]
+        public void StoreInSavingsAccount()
+        {
+            AccountEvents accountEvents = new AccountEvents();
+
+            accountEvents.Transactions.Add(new SavingsAccount("Max Kroon", "NL 78 INGB 0004 7844 1234 5678", 12599m));
+
+            Assert.AreEqual(true, accountEvents.Transactions.Any(x => x.Balance == 12599m));
         }
 
     }
