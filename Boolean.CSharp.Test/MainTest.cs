@@ -37,7 +37,7 @@ namespace Boolean.CSharp.Test
 
             accountEvents.Transactions.Add(new SavingsAccount("Max Kroon", "NL 78 INGB 0004 7844 1234 5678", 12599m));
 
-            Assert.AreEqual(true, accountEvents.Transactions.Any(x => x.Balance == 12599m));
+            Assert.AreEqual(true, accountEvents.Transactions.Any(x => x.Amount == 12599m));
         }
 
         [Test]
@@ -45,13 +45,13 @@ namespace Boolean.CSharp.Test
         {
             AccountEvents accountEvents = new AccountEvents();
             DateTime transactionDate1 = new DateTime(2012, 01, 10);
-            IBankStatement bankStatement1 = new BankStatements(transactionDate1, 4500m, 1000m, 5500m);
+            IBankStatement bankStatement1 = new Transaction(transactionDate1, 4500m, 1000m, 5500m);
 
             DateTime transactionDate2 = new DateTime(2012, 01, 13);
-            IBankStatement bankStatement2 = new BankStatements(transactionDate2, 5500m, 2000m, 7500m);
+            IBankStatement bankStatement2 = new Transaction(transactionDate2, 5500m, 2000m, 7500m);
 
             DateTime transactionDate3 = new DateTime(2012, 01, 14);
-            IBankStatement bankStatement3 = new BankStatements(transactionDate3, 7500m, -500m, 7000m);
+            IBankStatement bankStatement3 = new Transaction(transactionDate3, 7500m, -500m, 7000m);
             accountEvents.GenerateBankAnotherStatement(bankStatement1, bankStatement2, bankStatement3);
 
             List<IBankStatement> bankStatements = accountEvents.BankStatements;
@@ -67,6 +67,24 @@ namespace Boolean.CSharp.Test
             Assert.AreEqual(7500m, addedBankStatement.OldBalance);
             Assert.AreEqual(-500m, addedBankStatement.Amount);
             Assert.AreEqual(7000m, addedBankStatement.NewBalance);
+        }
+
+        [Test]
+
+        public void DepositCurrentAccount()
+        {
+            var accountEvents = new AccountEvents();
+
+            accountEvents.Transactions.Add(new SavingsAccount("Max Kroon", "NL 78 INGB 0004 7844 1234 5678", 12.99m));
+            accountEvents.Transactions.Add(new SavingsAccount("Bol.com", "NL 78 INGB 0004 7844 1234 5678", -35m));
+            accountEvents.Transactions.Add(new SavingsAccount("Max Kroon", "NL 78 INGB 0004 7844 1234 5678", 70m));
+
+            decimal result = accountEvents.Transactions.Sum(x => x.Amount);
+
+            Assert.AreEqual(result, 47.99m);
+
+
+
         }
 
     }

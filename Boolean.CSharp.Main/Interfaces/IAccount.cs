@@ -10,6 +10,6 @@ namespace Boolean.CSharp.Main.Interfaces
     {
         string Name { get; set; }
         string AccountNumber { get; set; }
-        decimal Balance { get; set; }
+        decimal Amount { get; set; }
     }
 }

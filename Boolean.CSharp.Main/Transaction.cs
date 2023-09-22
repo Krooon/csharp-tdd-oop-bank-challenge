@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Boolean.CSharp.Main
 {
-    public class BankStatements : IBankStatement
+    public class Transaction : IBankStatement
     {
         public DateTime Date { get; set; }
         public decimal OldBalance { get; set; }
@@ -15,7 +15,7 @@ namespace Boolean.CSharp.Main
         
         public decimal NewBalance { get; set; }
 
-        public BankStatements(DateTime Date, decimal OldBalance, decimal Amount, decimal NewBalance)
+        public Transaction(DateTime Date, decimal OldBalance, decimal Amount, decimal NewBalance)
         {
             this.Date = Date;
             this.Amount = Amount;

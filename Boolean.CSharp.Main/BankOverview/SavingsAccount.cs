@@ -11,13 +11,13 @@ namespace Boolean.CSharp.Main.Accounts
     {
         public string Name { get; set; }
         public string AccountNumber { get; set; }
-        public decimal Balance { get; set; }
+        public decimal Amount { get; set; }
 
-        public SavingsAccount(string Name, string AccountNumber, decimal Balance) 
+        public SavingsAccount(string Name, string AccountNumber, decimal Amount) 
         {
             this.Name = Name;
             this.AccountNumber = AccountNumber;
-            this.Balance = Balance;
+            this.Amount = Amount;
         }
     }
 

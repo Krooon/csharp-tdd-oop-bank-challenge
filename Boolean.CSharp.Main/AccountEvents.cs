@@ -20,7 +20,7 @@ namespace Boolean.CSharp.Main
 
         public decimal AddToCurrentAccount(IAccount accounts)
         {
-            decimal totalBalance = _accounts.Sum(x => x.Balance);
+            decimal totalBalance = _accounts.Sum(x => x.Amount);
             return totalBalance; 
         }
 
@@ -31,7 +31,7 @@ namespace Boolean.CSharp.Main
 
         public decimal CalculateTotalBalance(IAccount accounts)
         {
-            decimal totalBalance = _accounts.Sum(x => x.Balance);
+            decimal totalBalance = _accounts.Sum(x => x.Amount);
             return totalBalance;
         }
 
@@ -72,9 +72,9 @@ namespace Boolean.CSharp.Main
             decimal newBalance3 = oldBalance3 + amount3;
 
 
-            IBankStatement updatedStatement1 = new BankStatements(dateTime1, oldBalance1, amount1, newBalance1);
-            IBankStatement updatedStatement2 = new BankStatements(dateTime2, oldBalance2, amount2, newBalance2);
-            IBankStatement updatedStatement3 = new BankStatements(dateTime3, oldBalance3, amount3, newBalance3);
+            IBankStatement updatedStatement1 = new Transaction(dateTime1, oldBalance1, amount1, newBalance1);
+            IBankStatement updatedStatement2 = new Transaction(dateTime2, oldBalance2, amount2, newBalance2);
+            IBankStatement updatedStatement3 = new Transaction(dateTime3, oldBalance3, amount3, newBalance3);
             //{
             //    Date = dateTime,
             //    OldBalance = oldBalance,
