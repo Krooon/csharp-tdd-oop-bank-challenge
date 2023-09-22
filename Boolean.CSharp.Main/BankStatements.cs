@@ -10,11 +10,12 @@ namespace Boolean.CSharp.Main
     public class BankStatements : IBankStatement
     {
         public DateTime Date { get; set; }
-        public decimal Amount { get; set; }
         public decimal OldBalance { get; set; }
+        public decimal Amount { get; set; }
+        
         public decimal NewBalance { get; set; }
 
-        public BankStatements(DateTime Date, decimal Amount, decimal OldBalance, decimal NewBalance)
+        public BankStatements(DateTime Date, decimal OldBalance, decimal Amount, decimal NewBalance)
         {
             this.Date = Date;
             this.Amount = Amount;

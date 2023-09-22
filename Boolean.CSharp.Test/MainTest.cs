@@ -44,25 +44,29 @@ namespace Boolean.CSharp.Test
         public void TransactionRecords()
         {
             AccountEvents accountEvents = new AccountEvents();
-            DateTime transactionDate1 = new DateTime(2012, 10, 1);
+            DateTime transactionDate1 = new DateTime(2012, 01, 10);
+            IBankStatement bankStatement1 = new BankStatements(transactionDate1, 4500m, 1000m, 5500m);
 
+            DateTime transactionDate2 = new DateTime(2012, 01, 13);
+            IBankStatement bankStatement2 = new BankStatements(transactionDate2, 5500m, 2000m, 7500m);
 
-            IBankStatement bankStatement = new BankStatements(transactionDate1, 4500m, 1000m, 5500m);
-            accountEvents.GenerateBankAnotherStatement(bankStatement);
+            DateTime transactionDate3 = new DateTime(2012, 01, 14);
+            IBankStatement bankStatement3 = new BankStatements(transactionDate3, 7500m, -500m, 7000m);
+            accountEvents.GenerateBankAnotherStatement(bankStatement1, bankStatement2, bankStatement3);
 
             List<IBankStatement> bankStatements = accountEvents.BankStatements;
 
-            // Controleer of het bankafschrift is toegevoegd aan de lijst
-            Assert.AreEqual(1, bankStatements.Count); // Er moet één bankafschrift in de lijst zijn
+            
+            Assert.AreEqual(3, bankStatements.Count);  
 
-            // Haal het eerste bankafschrift uit de lijst
-            IBankStatement addedBankStatement = bankStatements[0];
+            
+            IBankStatement addedBankStatement = bankStatements[2];
 
-            // Controleer of de waarden overeenkomen met wat je hebt toegevoegd
-            Assert.AreEqual(transactionDate1, addedBankStatement.Date);
-            Assert.AreEqual(1000m, addedBankStatement.Amount);
-            Assert.AreEqual(4500m, addedBankStatement.OldBalance);
-            Assert.AreEqual(5500m, addedBankStatement.NewBalance);
+            
+            Assert.AreEqual(transactionDate3, addedBankStatement.Date);
+            Assert.AreEqual(7500m, addedBankStatement.OldBalance);
+            Assert.AreEqual(-500m, addedBankStatement.Amount);
+            Assert.AreEqual(7000m, addedBankStatement.NewBalance);
         }
 
     }

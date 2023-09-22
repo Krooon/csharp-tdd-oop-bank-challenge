@@ -1,6 +1,7 @@
 ﻿using Boolean.CSharp.Main.Accounts;
 using Boolean.CSharp.Main.Interfaces;
 using Microsoft.VisualBasic;
+using NUnit.Framework.Constraints;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -34,26 +35,46 @@ namespace Boolean.CSharp.Main
             return totalBalance;
         }
 
-        public IBankStatement GenerateBankStatement(IBankStatement bankStatement)
+        //public IBankStatement GenerateBankStatement(IBankStatement bankStatement)
+        //{
+        //    DateTime dateTime = bankStatement.Date;
+        //    decimal oldBalance = _bankStatements.Sum(x => x.OldBalance);
+        //    decimal amount = _bankStatements.Sum(x => x.Amount);
+        //    decimal newBalance = oldBalance + amount;
+        //    //return oldBalance, amount, newBalance, dateTime;
+        //    return bankStatement;
+
+        //}
+
+      /*  public IBankStatement GenerateAnotherBankstatement2(List<IBankStatement> statements)
         {
-            DateTime dateTime = bankStatement.Date;
-            decimal oldBalance = _bankStatements.Sum(x => x.OldBalance);
-            decimal amount = _bankStatements.Sum(x => x.Amount);
-            decimal newBalance = oldBalance + amount;
-            //return oldBalance, amount, newBalance, dateTime;
-            return bankStatement;
+            _bankStatements.AddRange(statements);
+            return bank
+        }*/
 
-        }
 
-        public IBankStatement GenerateBankAnotherStatement(IBankStatement bankStatement)
+
+        public void GenerateBankAnotherStatement(IBankStatement bankStatement1, IBankStatement bankStatement2, IBankStatement bankStatement3)
         {
-            DateTime dateTime = bankStatement.Date;
-            decimal oldBalance = bankStatement.OldBalance;
-            decimal amount = bankStatement.Amount;
-            decimal newBalance = oldBalance + amount;
+            DateTime dateTime1 = bankStatement1.Date;
+            decimal oldBalance1 = bankStatement1.OldBalance;
+            decimal amount1 = bankStatement1.Amount;
+            decimal newBalance1 = oldBalance1 + amount1;
 
-            // Maak een nieuw IBankStatement-object met bijgewerkte gegevens
-            IBankStatement updatedStatement = new BankStatements(dateTime, oldBalance, amount, newBalance);
+            DateTime dateTime2 = bankStatement2.Date;
+            decimal oldBalance2 = bankStatement2.OldBalance;
+            decimal amount2 = bankStatement2.Amount;
+            decimal newBalance2 = oldBalance2 + amount2;
+
+            DateTime dateTime3 = bankStatement3.Date;
+            decimal oldBalance3 = bankStatement3.OldBalance;
+            decimal amount3 = bankStatement3.Amount;
+            decimal newBalance3 = oldBalance3 + amount3;
+
+
+            IBankStatement updatedStatement1 = new BankStatements(dateTime1, oldBalance1, amount1, newBalance1);
+            IBankStatement updatedStatement2 = new BankStatements(dateTime2, oldBalance2, amount2, newBalance2);
+            IBankStatement updatedStatement3 = new BankStatements(dateTime3, oldBalance3, amount3, newBalance3);
             //{
             //    Date = dateTime,
             //    OldBalance = oldBalance,
@@ -61,9 +82,19 @@ namespace Boolean.CSharp.Main
             //    NewBalance = newBalance
             //};
 
-            // Retourneer het bijgewerkte IBankStatement-object
-            _bankStatements.Add(updatedStatement);
-            return updatedStatement;
+            _bankStatements.Add(bankStatement1);
+            _bankStatements.Add(bankStatement2);
+            _bankStatements.Add(bankStatement3);
+
+
+            /*_bankStatements.Add(updatedStatement1);
+            _bankStatements.Add(updatedStatement2);
+            _bankStatements.Add(updatedStatement3);*/
+
+            /*IBankStatement updatedStatement = new (updatedStatement1, updatedStatement2, updatedStatement3)*/;
+            /*return updatedStatement1;
+            return updatedStatement2;*/
+            /*return updatedStatement3;*/
         }
 
 
