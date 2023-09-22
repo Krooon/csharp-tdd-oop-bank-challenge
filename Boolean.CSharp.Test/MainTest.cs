@@ -71,20 +71,32 @@ namespace Boolean.CSharp.Test
 
         [Test]
 
-        public void DepositCurrentAccount()
+        public void DepositAndWithdrawlCurrentAccount()
         {
             var accountEvents = new AccountEvents();
 
-            accountEvents.Transactions.Add(new SavingsAccount("Max Kroon", "NL 78 INGB 0004 7844 1234 5678", 12.99m));
-            accountEvents.Transactions.Add(new SavingsAccount("Bol.com", "NL 78 INGB 0004 7844 1234 5678", -35m));
-            accountEvents.Transactions.Add(new SavingsAccount("Max Kroon", "NL 78 INGB 0004 7844 1234 5678", 70m));
+            accountEvents.Transactions.Add(new CurrentAccount("Max Kroon", "NL 78 INGB 0004 7844 1234 5678", 12.99m));
+            accountEvents.Transactions.Add(new CurrentAccount("Bol.com", "NL 78 INGB 0004 7844 1234 5678", -35m));
+            accountEvents.Transactions.Add(new CurrentAccount("Max Kroon", "NL 78 INGB 0004 7844 1234 5678", 70m));
 
             decimal result = accountEvents.Transactions.Sum(x => x.Amount);
 
             Assert.AreEqual(result, 47.99m);
 
+        }
 
+        [Test]
+        public void DepositAndWithdrawlSavingsAccount()
+        {
+            var accountEvents = new AccountEvents();
 
+            accountEvents.Transactions.Add(new SavingsAccount("Max Kroon", "NL 78 INGB 0004 7844 1234 5678", 300m));
+            accountEvents.Transactions.Add(new SavingsAccount("Bol.com", "NL 78 INGB 0004 7844 1234 5678", -500m));
+            accountEvents.Transactions.Add(new SavingsAccount("Max Kroon", "NL 78 INGB 0004 7844 1234 5678", 50m));
+
+            decimal result = accountEvents.Transactions.Sum(x => x.Amount);
+
+            Assert.AreEqual(result, -150m);
         }
 
     }
